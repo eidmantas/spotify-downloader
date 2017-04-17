@@ -39,6 +39,9 @@ module.exports = function(uriIN, done, update) {
         var total = tracks.length
         var done = 0
         tracks.forEach((track, index)=>{
+            
+            setTimeout(function() {console.log("magical hack timeout")}, 1000);
+            
             spotify.track(track.id, function(err, track2){
                 if (track2 && track2.track.album){
                     track.album = track2.track.album
@@ -46,7 +49,6 @@ module.exports = function(uriIN, done, update) {
                     console.log("No album found");
                     track.album = {}
                 }
-                setTimeout(function() {console.log("magical hack timeout")}, 1000);
                 toUrl(track, function(err, data){
                     if (data){
                         download(index, playlistId, track, data.id, function (err){
