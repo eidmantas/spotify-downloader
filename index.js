@@ -34,7 +34,33 @@ module.exports = function(uriIN, done, update) {
         })
     });
 
- function downloadTracks(playlistId, tracks)
+module.exports = function(uriIN, done, update, hackTimeOut) {
+
+    var uri = uriIN;
+    console.log(uri);
+    var playlistId = Math.floor(Math.random() * 1000000000) + '';
+
+    spotifyPlaylist.playlistUri(uri, function(err, data){
+        console.log("Got playlist");
+        if (err == "Fail!"){
+            console.log(callback);
+            console.log(update);
+            update("Invalid playlist");
+            done("Invalid playlist");
+            return;
+        }
+        var tracks = data.playlist.tracks
+        fs.mkdir("./" + playlistId, function(err)
+        {
+            if (err == null){
+                downloadTracks(playlistId, tracks);
+            }else {
+                done("Directory creation failed");
+            }
+        })
+    });
+
+    function downloadTracks(playlistId, tracks)
     {
         var total = tracks.length
         var done = 0
@@ -73,7 +99,7 @@ module.exports = function(uriIN, done, update) {
                 
                 });
 
-		}, index*5000);
+		}, index*hackTimeOut);
            
             
 
