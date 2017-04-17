@@ -14,13 +14,13 @@ var Downloader = function() {
     self.callbacks = {};
 
     self.YD.on("finished", function(data) {
-
+        if (data && data.videoId) {
         if (self.callbacks[data.videoId]) {
             self.callbacks[data.videoId](null,data);
         } else {
             console.log("Error: No callback for videoId!");
         }
-
+        }
     });
 
     self.YD.on("error", function(error) {
