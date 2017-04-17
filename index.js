@@ -73,7 +73,7 @@ module.exports = function(uriIN, done, update) {
                 
                 });
 
-		}, index*1000);
+		}, index*5000);
            
             
 
