@@ -34,14 +34,14 @@ module.exports = function(uriIN, done, update) {
         })
     });
 
-    function downloadTracks(playlistId, tracks)
+ function downloadTracks(playlistId, tracks)
     {
         var total = tracks.length
         var done = 0
         tracks.forEach((track, index)=>{
             
-            setTimeout(function() {console.log("magical hack timeout")}, 1000);
-            
+            setTimeout(function() {
+		console.log("magical hack timeout");
             spotify.track(track.id, function(err, track2){
                 if (track2 && track2.track.album){
                     track.album = track2.track.album
@@ -69,8 +69,13 @@ module.exports = function(uriIN, done, update) {
                             zip(playlistId)
                         }
                     }
+                    });
+                
                 });
-            });
+
+		}, index*1000);
+           
+            
 
         });
     }
