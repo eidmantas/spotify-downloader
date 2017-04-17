@@ -46,6 +46,7 @@ module.exports = function(uriIN, done, update) {
                     console.log("No album found");
                     track.album = {}
                 }
+                setTimeout(function() {console.log("magical hack timeout")}, 1000);
                 toUrl(track, function(err, data){
                     if (data){
                         download(index, playlistId, track, data.id, function (err){
